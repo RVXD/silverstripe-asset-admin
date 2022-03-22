@@ -199,6 +199,9 @@ class UploadField extends FormField implements FileHandleField
         $state = parent::getSchemaStateDefaults();
         $state['data']['files'] = $this->getEncodedItems();
         $state['value'] = $this->Value() ?: ['Files' => []];
+        // force react component to always update when field is rendered,
+        // by making value.Files and data.files mismatch in the state
+        $state['value']['Files'][] = -1;
         return $state;
     }
 
